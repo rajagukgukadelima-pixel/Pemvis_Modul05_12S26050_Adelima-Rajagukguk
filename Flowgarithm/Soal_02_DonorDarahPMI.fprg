@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Soal_02_DonorDarahPMI"/>
+        <attribute name="authors" value="Adelima"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-09 06:27:45 PM"/>
+        <attribute name="created" value="QWRlbGltYTtBREVMSU1BLVJHRzsyMDI2LTEwLTA5OzAyOjIwOjQzIFBNOzI3MjI="/>
+        <attribute name="edited" value="QWRlbGltYTtBREVMSU1BLVJHRzsyMDI2LTEwLTA5OzA2OjI3OjQ1IFBNOzI7Mjg0NA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="u, sistolik, diastolik, jdonor, vkantong" type="Integer" array="False" size=""/>
+            <declare name="bb, hemoglobin" type="Real" array="False" size=""/>
+            <declare name="izinortu" type="Boolean" array="False" size=""/>
+            <output expression="&quot;Berapa usia anda?&quot;" newline="True"/>
+            <input variable="u"/>
+            <output expression="&quot;Apakah anda memiliki izin dari orang tua?&quot;" newline="True"/>
+            <input variable="izinortu"/>
+            <output expression="&quot;Berapa berat badan anda?&quot;" newline="True"/>
+            <input variable="bb"/>
+            <output expression="&quot;Berapa tekanan darah sistolik anda?&quot;" newline="True"/>
+            <input variable="sistolik"/>
+            <output expression="&quot;Berapa tekanan darah diastolik anda?&quot;" newline="True"/>
+            <input variable="diastolik"/>
+            <output expression="&quot;Berapa kadar HB nya?&quot;" newline="True"/>
+            <input variable="hemoglobin"/>
+            <output expression="&quot;Berapa jarak donornya?&quot;" newline="True"/>
+            <input variable="jdonor"/>
+            <if expression="u&lt;17 OR u&gt;60">
+                <then>
+                    <output expression="&quot;Tidak memenuhi syarat&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="u==17 AND izinortu==False">
+                        <then>
+                            <output expression="&quot;Tidak memenuhi syarat&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <if expression="bb&lt;45">
+                                <then>
+                                    <output expression="&quot;Tidak memenuhi syarat&quot;" newline="True"/>
+                                </then>
+                                <else>
+                                    <if expression="sistolik&lt;100 OR sistolik&gt;140">
+                                        <then>
+                                            <output expression="&quot;Tekanan sistoliknya di luar batas&quot;" newline="True"/>
+                                        </then>
+                                        <else>
+                                            <if expression="diastolik&lt;70 OR diastolik&gt;90">
+                                                <then>
+                                                    <output expression="&quot;Tekanan diastoliknya di luar batas&quot;" newline="True"/>
+                                                </then>
+                                                <else>
+                                                    <if expression="hemoglobin&lt;12.5 OR hemoglobin&gt;17.0">
+                                                        <then>
+                                                            <output expression="&quot;Kadar hemoglobin di luar batas&quot;" newline="True"/>
+                                                        </then>
+                                                        <else>
+                                                            <if expression="jdonor&lt;60">
+                                                                <then>
+                                                                    <output expression="&quot;Tidak memenuhi syarat&quot;" newline="True"/>
+                                                                </then>
+                                                                <else/>
+                                                            </if>
+                                                        </else>
+                                                    </if>
+                                                </else>
+                                            </if>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                    <if expression="bb&lt;55">
+                        <then>
+                            <assign variable="vkantong" expression="350"/>
+                        </then>
+                        <else>
+                            <assign variable="vkantong" expression="450"/>
+                        </else>
+                    </if>
+                    <output expression="&quot;Calon pendonornya memenuhi syarat&quot;" newline="True"/>
+                    <output expression="&quot;Volume kantong darahnya:&quot; &amp; vkantong &amp; &quot;ml&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

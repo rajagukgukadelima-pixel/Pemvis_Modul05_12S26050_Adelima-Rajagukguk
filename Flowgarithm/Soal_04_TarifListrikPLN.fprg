@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Soal_04_TarifListrikPLN"/>
+        <attribute name="authors" value="Adelima"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-09 05:10:18 PM"/>
+        <attribute name="created" value="QWRlbGltYTtBREVMSU1BLVJHRzsyMDI2LTEwLTA5OzA0OjA0OjA2IFBNOzI3MjU="/>
+        <attribute name="edited" value="QWRlbGltYTtBREVMSU1BLVJHRzsyMDI2LTEwLTA5OzA1OjEwOjE4IFBNOzI7MjgzNQ=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="kWh, t1, t2, t3, pPPJ, kVa, biaya, bminim, ppj, total" type="Real" array="False" size=""/>
+            <declare name="gol, dayaVA" type="Integer" array="False" size=""/>
+            <assign variable="t1" expression="1000"/>
+            <assign variable="t2" expression="1500"/>
+            <assign variable="t3" expression="2000"/>
+            <output expression="&quot;golongan (1=R1, 2=R2, 3=R3):&quot;" newline="True"/>
+            <input variable="gol"/>
+            <output expression="&quot;daya VA&quot;" newline="True"/>
+            <input variable="dayaVA"/>
+            <output expression="&quot;pemakaian kWh&quot;" newline="True"/>
+            <input variable="kWh"/>
+            <if expression="kWh&lt;0">
+                <then>
+                    <output expression="&quot;kWh tidak boleh negatif&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="(gol==1 AND dayaVA==990) OR (gol==2 AND (dayaVA&gt;=1300 AND dayaVA&lt;=2200)) OR (gol==3 AND dayaVA&gt;=3500)">
+                        <then>
+                            <if expression="gol==3">
+                                <then>
+                                    <assign variable="pPPJ" expression="0.08"/>
+                                </then>
+                                <else>
+                                    <assign variable="pPPJ" expression="0.05"/>
+                                </else>
+                            </if>
+                            <if expression="kWh&lt;=50">
+                                <then>
+                                    <assign variable="biaya" expression="kWh*t1"/>
+                                </then>
+                                <else>
+                                    <if expression="kWh&lt;=150">
+                                        <then>
+                                            <assign variable="biaya" expression="50*t1+(kWh-50)*t2"/>
+                                        </then>
+                                        <else>
+                                            <assign variable="biaya" expression="50*t1+100*t2(kWh-150)*t3"/>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                            <assign variable="kVA" expression="dayaVA/1000"/>
+                            <assign variable="bminim" expression="40*kVA*t1"/>
+                            <if expression="biaya&lt;bminim">
+                                <then>
+                                    <assign variable="biaya" expression="bminim"/>
+                                </then>
+                                <else/>
+                            </if>
+                            <assign variable="ppj" expression="biaya*pPPJ"/>
+                            <assign variable="total" expression="biaya+ppj"/>
+                            <output expression="&quot;Biaya awal: Rp&quot; &amp; biaya" newline="True"/>
+                            <output expression="&quot;Pajak PPJ: Rp&quot; &amp; ppj" newline="True"/>
+                            <output expression="&quot;Total tagihan di akhir: Rp&quot; &amp; total" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;golongan tidak valid&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

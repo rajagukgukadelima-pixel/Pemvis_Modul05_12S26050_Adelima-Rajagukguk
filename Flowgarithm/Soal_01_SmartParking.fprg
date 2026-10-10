@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Soal_01_SmartParking"/>
+        <attribute name="authors" value="Adelima"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-09 02:15:10 PM"/>
+        <attribute name="created" value="QWRlbGltYTtBREVMSU1BLVJHRzsyMDI2LTEwLTA5OzAxOjQ3OjM3IFBNOzI3MzM="/>
+        <attribute name="edited" value="QWRlbGltYTtBREVMSU1BLVJHRzsyMDI2LTEwLTA5OzAyOjE1OjEwIFBNOzE7MjgyOA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="durasi" type="Integer" array="False" size=""/>
+            <declare name="jkendaraan" type="String" array="False" size=""/>
+            <declare name="voucher" type="Boolean" array="False" size=""/>
+            <declare name="bawal, d, ttagihan, disk, takhir, dinap" type="Real" array="False" size=""/>
+            <output expression="&quot;Apa jenis kendaraan yang anda gunakan?&quot;" newline="True"/>
+            <input variable="jkendaraan"/>
+            <output expression="&quot;Berapa banyak durasi waktu yang dibutuhkan?&quot;" newline="True"/>
+            <input variable="durasi"/>
+            <output expression="&quot;Apakah anda memiliki voucher?&quot;" newline="True"/>
+            <input variable="voucher"/>
+            <if expression="durasi &gt;0">
+                <then>
+                    <if expression="jkendaraan==&quot;S&quot; OR jkendaraan==&quot;M&quot;">
+                        <then>
+                            <if expression="jkendaraan==&quot;S&quot;">
+                                <then>
+                                    <if expression="durasi&lt;=2">
+                                        <then>
+                                            <assign variable="bawal" expression="2000"/>
+                                        </then>
+                                        <else>
+                                            <assign variable="bawal" expression="2000+(durasi-2)*1000"/>
+                                        </else>
+                                    </if>
+                                </then>
+                                <else>
+                                    <if expression="durasi&lt;=2">
+                                        <then>
+                                            <assign variable="bawal" expression="5000"/>
+                                        </then>
+                                        <else>
+                                            <assign variable="bawal" expression="5000+(durasi-2)*3000"/>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </then>
+                        <else/>
+                    </if>
+                    <if expression="durasi&gt;12">
+                        <then>
+                            <assign variable="dinap" expression="25000"/>
+                        </then>
+                        <else>
+                            <assign variable="dinap" expression="0"/>
+                        </else>
+                    </if>
+                </then>
+                <else>
+                    <output expression="&quot;tidak valid&quot;" newline="True"/>
+                </else>
+            </if>
+            <assign variable="ttagihan" expression="bawal+dinap"/>
+            <if expression="voucher==True">
+                <then>
+                    <assign variable="d" expression="ttagihan*0.10"/>
+                </then>
+                <else>
+                    <assign variable="d" expression="0"/>
+                </else>
+            </if>
+            <assign variable="takhir" expression="ttagihan-d"/>
+            <output expression="&quot;Biaya Awal: Rp&quot; &amp; bawal" newline="True"/>
+            <output expression="&quot;Denda Inap: Rp&quot; &amp; dinap" newline="True"/>
+            <output expression="&quot;Total Diskon: Rp&quot; &amp; d" newline="True"/>
+            <output expression="&quot;Total bayar Akhir: Rp&quot; &amp; takhir" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
